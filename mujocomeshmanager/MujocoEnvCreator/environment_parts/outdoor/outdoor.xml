@@ -1,11 +1,11 @@
 <mujoco model="lab">
-    <compiler convexhull="true" angle="radian" meshdir="environment_parts/" texturedir="environment_parts/outdoor/textures" />
+    <compiler convexhull="false" angle="radian" meshdir="environment_parts/" texturedir="environment_parts/outdoor/textures" />
     <option integrator="implicitfast"/>
     <option timestep="0.001" />
     <option>
         <flag multiccd="enable" />
     </option>
-    <statistic extent="0.3" center="0.3 0 0" meansize=".03"/>
+    <statistic extent="0.3" center="0.3 0 0" meansize="0.8"/>
 
     <asset>
         <texture name="texplane" type="2d" file="floor_texture.png" />

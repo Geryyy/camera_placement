@@ -1,9 +1,8 @@
 <mujoco model="camera">
-    <compiler convexhull="true" angle="radian" meshdir="environment_parts/camera/assets" />
+    <compiler angle="radian" meshdir="environment_parts/camera/assets" />
     <option integrator="implicitfast"/>
         <option timestep="0.001" >
     </option>
-    <statistic extent="0.3" center="0.3 0 0" meansize=".03"/>
 
     <asset>
     </asset>

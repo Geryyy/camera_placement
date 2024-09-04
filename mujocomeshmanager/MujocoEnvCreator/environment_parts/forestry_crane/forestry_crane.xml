@@ -17,7 +17,7 @@
     <compiler meshdir="environment_parts/forestry_crane/assets/" angle="radian" inertiafromgeom="true" discardvisual="false" texturedir= "environment_parts/forestry_crane/texture"/>
     <!-- <statistic meansize="0.1"/> -->
     <!-- <option sdf_iterations="100" sdf_initpoints="40" timestep="0.005" integrator="implicitfast" solver="Newton" actuatorgroupdisable="2" cone="elliptic" /> -->
-    <option sdf_iterations="100" sdf_initpoints="40" timestep="0.005" integrator="implicitfast" solver="Newton" cone="elliptic" />
+    <option sdf_iterations="20" sdf_initpoints="40" timestep="0.005" integrator="implicitfast" solver="Newton" cone="elliptic" />
 
     <!-- <visual>
         <rgba haze="0.15 0.25 0.35 1"/>

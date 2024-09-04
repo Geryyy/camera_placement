@@ -1,9 +1,8 @@
 <mujoco model="block">
-    <compiler convexhull="true" angle="radian" meshdir="environment_parts/legoblock/assets" />
+    <compiler angle="radian" meshdir="environment_parts/legoblock/assets" />
     <option integrator="implicitfast"/>
         <option timestep="0.001" >
     </option>
-    <statistic extent="0.3" center="0.3 0 0" meansize=".03"/>
 
 <asset>
     <mesh name="legoblock" file="LegoBlock.stl" scale="10 10 10 "/>
@@ -12,7 +11,7 @@
     <worldbody>
         <body name="block_body" pos="0 0 0" quat="1 0 0 0">
             <!-- <freejoint name="block_joint"/> -->
-            <geom name="block_geom" type="mesh" mesh="legoblock" rgba="0 1 0 1" contype="1" conaffinity="1" group="0" solref="0.01 1" solimp="0.5 0.95 0.01 0.9 2"/>
+            <geom name="block_geom" type="mesh" mesh="legoblock" rgba="0 1 0 1" contype="1" conaffinity="1" group="0" friction="350" priority="1"/>
             <inertial pos="0 0 0" mass="800" />
         </body>
     </worldbody>
