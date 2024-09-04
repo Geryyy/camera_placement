@@ -14,7 +14,7 @@
         </plugin>
     </extension>
     
-    <compiler convexhull="false"  meshdir="environment_parts/forestry_crane/assets/" angle="radian" inertiafromgeom="true" discardvisual="false" texturedir= "environment_parts/forestry_crane/texture"/>
+    <compiler convexhull="true"  meshdir="environment_parts/forestry_crane/assets/" angle="radian" inertiafromgeom="true" discardvisual="false" texturedir= "environment_parts/forestry_crane/texture"/>
 
     <option sdf_iterations="100" sdf_initpoints="40" integrator="implicitfast" solver="Newton" cone="elliptic" noslip_iterations="3" />
 
