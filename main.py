@@ -190,6 +190,8 @@ def print_gamecontrols(screen):
 if __name__ == "__main__":
     print("Forestry Crane Environment")
 
+    np.set_printoptions(precision=3, suppress=True)
+
     pygame.init()
     pygame.joystick.init()
     joystick_count = pygame.joystick.get_count()
@@ -237,8 +239,24 @@ if __name__ == "__main__":
         viewer.cam.elevation = -11
         viewer.cam.distance = 16.4
         viewer.cam.lookat = [-2.98643575, -2.36544112,  0.71912036]
+
+        # set keyframe 
+        # keyframe = [-0.48,0.75,-0.3,0.4,0.4,1.3,1.5,-0.0234,0.117,0.117]
+        # mj_data.qpos[0:len(keyframe)] = keyframe
+        # mj_data.qacc[:] = np.zeros_like(mj_data.qacc)
+        # mujoco.mj_forward(mj_model, mj_data)
+        
+        mujoco.mj_resetDataKeyframe(mj_model, mj_data, 0)
         
         while viewer.is_running():
+            # viewer.sync()
+            # if mj_data.time < mj_model.opt.timestep:
+            #     print("simulation reset")
+            #     mj_data.qpos[0:len(keyframe)] = keyframe
+            #     mj_data.qacc[:] = np.zeros_like(mj_data.qacc)
+            #     mujoco.mj_forward(mj_model, mj_data)
+            #     #mujoco.mj_resetData(mj_model, mj_data)
+
             step_start = time.time()
             mujoco.mj_step(mj_model, mj_data)
 
@@ -270,6 +288,7 @@ if __name__ == "__main__":
 
                 print("{:.2f} {:.2f} {:.2f} {:.2f} {:.2f} {:.2f}\r".format(left_stick_x, left_stick_y, right_stick_x, right_stick_y, trigger_back, axis_back), end='')
 
+                # print("mj_data.qpos: ", mj_data.qpos) # good for keyframe selection
 
             time_until_next_step = mj_model.opt.timestep - (time.time() - step_start)
             if time_until_next_step > 0:

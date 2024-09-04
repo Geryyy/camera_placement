@@ -1,18 +1,20 @@
 <mujoco model="block">
     <compiler angle="radian" meshdir="environment_parts/legoblock/assets" />
-    <option integrator="implicitfast"/>
-        <option timestep="0.001" >
-    </option>
 
 <asset>
     <mesh name="legoblock" file="LegoBlock.stl" scale="10 10 10 "/>
 </asset>
 
+        <default class="block_collision">
+            <geom contype="1" conaffinity="1" condim="4" solimp="0.99 0.99 0.01" solref="0.01 1"/>
+        </default>
+
     <worldbody>
         <body name="block_body" pos="0 0 0" quat="1 0 0 0">
             <!-- <freejoint name="block_joint"/> -->
-            <geom name="block_geom" type="mesh" mesh="legoblock" rgba="0 1 0 1" contype="1" conaffinity="1" group="0" friction="350" priority="1"/>
+            <geom name="block_geom" pos="0 -0.195 0" type="mesh" mesh="legoblock" rgba="0 1 0 1" />
             <inertial pos="0 0 0" mass="800" />
+            <geom name="collision_box" class="block_collision" type="box" size="0.195 0.2 0.395" pos="0 0 0" rgba="1 0 0 0.5" group="1" />
         </body>
     </worldbody>
 </mujoco>

@@ -13,39 +13,27 @@
             </instance>
         </plugin>
     </extension>
-    <!--compiler meshdir="./models/mujoco_crane/timber_crane_simple_ver_without_visual/crane/meshes/" angle="radian" autolimits="true" balanceinertia="true" boundmass="0.000001" boundinertia="0.000001" discardvisual="true"/-->
-    <compiler meshdir="environment_parts/forestry_crane/assets/" angle="radian" inertiafromgeom="true" discardvisual="false" texturedir= "environment_parts/forestry_crane/texture"/>
-    <!-- <statistic meansize="0.1"/> -->
-    <!-- <option sdf_iterations="100" sdf_initpoints="40" timestep="0.005" integrator="implicitfast" solver="Newton" actuatorgroupdisable="2" cone="elliptic" /> -->
-    <option sdf_iterations="20" sdf_initpoints="40" timestep="0.005" integrator="implicitfast" solver="Newton" cone="elliptic" />
+    
+    <compiler convexhull="false"  meshdir="environment_parts/forestry_crane/assets/" angle="radian" inertiafromgeom="true" discardvisual="false" texturedir= "environment_parts/forestry_crane/texture"/>
 
-    <!-- <visual>
-        <rgba haze="0.15 0.25 0.35 1"/>
-        <map stiffness="700" shadowscale="0.5" fogstart="1" fogend="15" zfar="40" haze="1" shadowclip="3"/>
-    </visual> -->
+    <option sdf_iterations="100" sdf_initpoints="40" integrator="implicitfast" solver="Newton" cone="elliptic" noslip_iterations="3" />
+
+    <keyframe>
+        <key name="default" qpos="-0.48   0.736 -0.303  0.428  0.43   1.179  1.525 -0.403  0.125  0.125
+  0.     0.    -0.3    1.     0.    -0.     0.    -0.    -0.    -0.11
+  1.     0.     0.     0.    -0.    -0.    -0.11   1.     0.     0.
+ -0." />
+    </keyframe>
+
 
     <default>
         <default class="visual">
             <geom contype="0" conaffinity="0"/>
         </default>
         <default class="collision">
-            <geom rgba="0 0 0 0" condim="3"/>
-            <!--
-			<geom rgba="1 1 0.1 1" condim="3"/>
-			-->
+            <geom contype="1" conaffinity="1" condim="4" solimp="0.99 0.99 0.01" solref="0.01 1"/>
         </default>
-        <!-- <default class="tree_geom">
-            <geom rgba="1 1 0.1 1" condim="3" contype="1" conaffinity="1"/>
-        </default> -->
-        <!-- <default class="motor">
-		<motor group="2" /> 
-	</default>
-    <default class="position">
-		<position group="0"/>
-    </default>
-    <default class="velocity">
-		<position group="1"/>
-	</default> -->
+
     </default>
 
     <actuator>
@@ -58,25 +46,12 @@
 
         <velocity name="vel_q1" joint="theta1_slewing_joint" kv = "1e7" ctrlrange="-1.57 1.57"/>
         <velocity name="vel_q2" joint="theta2_boom_joint" kv = "1e7" ctrlrange="-1.57 1.57"/>
-		<velocity name="vel_q3" joint="theta3_arm_joint" kv = "1e7" ctrlrange="-1.57 1.57"/>
-		<velocity name="vel_q4" joint="q4_big_telescope" kv = "1e6" ctrlrange="-2 2"/>
-		<velocity name="vel_q8" joint="theta8_rotator_joint" kv = "3e5" ctrlrange="-3 3"/>
-		<velocity name="vel_q12" joint="theta12_inner_jaw_joint" kv = "3e5" ctrlrange="-3 3"/>
+        <velocity name="vel_q3" joint="theta3_arm_joint" kv = "1e7" ctrlrange="-1.57 1.57"/>
+        <velocity name="vel_q4" joint="q4_big_telescope" kv = "1e6" ctrlrange="-2 2"/>
+        <velocity name="vel_q8" joint="theta8_rotator_joint" kv = "3e5" ctrlrange="-3 3"/>
+        <velocity name="vel_q12" joint="theta12_inner_jaw_joint" kv = "3e5" ctrlrange="-3 3"/>
 
-        <!-- <position class="position" ctrllimited="true" ctrlrange="-3.71 3.71" joint="theta1_slewing_joint"  kp = "1e6" name="pos_q1" gear="1"/>
-        <position class="position" ctrllimited="true" ctrlrange="-1.20 1.563" joint="theta2_boom_joint" kp = "1e6" name="pos_q2" gear="1" />
-        <position class="position" ctrllimited="true" ctrlrange="-0.91 4.60" joint="theta3_arm_joint" kp = "1e6" name="pos_q3" gear="1"/>
-        <position class="position" ctrllimited="true" ctrlrange="0 2.236" joint="q4_big_telescope" kp = "1e5" name="pos_q4" gear="1"/>
-        <position class="position" ctrllimited="true" ctrlrange="-3.14159 3.14159" joint="theta8_rotator_joint" name="pos_q8_rotator_joint" kp = "1e5" gear="1"/>
-        <position class="position" ctrllimited="true" ctrlrange="0 3" joint="theta12_inner_jaw_joint" name="pos_q12_inner_jaw_joint" kp = "1e5" gear="1"/> -->
-
-        <!-- <velocity class = "velocity" name="vel_q1" joint="theta1_slewing_joint" kv = "1e6" ctrlrange="-1.57 1.57"/>
-		<velocity class = "velocity" name="vel_q2" joint="theta2_boom_joint" kv = "1e6" ctrlrange="-1.57 1.57"/>
-		<velocity class = "velocity" name="vel_q3" joint="theta3_arm_joint" kv = "1e6" ctrlrange="-1.57 1.57"/>
-		<velocity class = "velocity" name="vel_q4" joint="q4_big_telescope" kv = "1e5" ctrlrange="-2 2"/>
-		<velocity class = "velocity" name="vel_q8" joint="theta8_rotator_joint" kv = "3e4" ctrlrange="-3 3"/>
-		<velocity class = "velocity" name="vel_q12" joint="theta12_inner_jaw_joint" kv = "3e4" ctrlrange="-3 3"/>
-		
+        <!--
 		<motor class = "motor" ctrllimited="true" ctrlrange="-1e7 1e7" joint="theta1_slewing_joint" name="torq_q1"/>
 		<motor class = "motor" ctrllimited="true" ctrlrange="-1e7 1e7" joint="theta2_boom_joint" name="torq_q2"/>
 		<motor class = "motor" ctrllimited="true" ctrlrange="-1e7 1e7" joint="theta3_arm_joint" name="torq_q3"/>
@@ -216,7 +191,7 @@
                     <inertial pos="-0.315 0.35 0.1485" quat="0.707107 0.707107 0 0" mass="200" diaginertia="10 10 10"/>
                     <geom name="K0_mounting_base_visual_0" pos="-0.315 0.35 0.1485" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="mounting_base_visual"/>
                     <!--geom name="K0_mounting_base_collision_0" pos="-0.315 0.35 0.1485" quat="1.0 0.0 0.0 0.0" class="collision" type="mesh" mesh="mounting_base_collision"/-->
-                                        
+
                     <body name="moved_with_q1" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
                         <joint name="theta1_slewing_joint" pos="0.0 0.0 0.0" type="hinge" range="-3.7099999134770023 3.7099999134770023" axis="0.0 0.0 1.0" damping="7500" limited ="true"/>
                         <!-- camera attachement base -->
@@ -340,68 +315,12 @@
             </body>
         </body>
 
-        <!--body name="tree" pos="-7 6 0.4">
-		<freejoint name="tree_joint"/>
-		<inertial pos="0 0 0" mass="1000" diaginertia="1 1 1"/>
-      <geom name="trunk" class="collision" type="cylinder" size="0.4 2.5" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-    </body-->
-
-        <!-- <body name="tree_0.100" pos="15 0 0.1">
-            <freejoint name="tree_joint_0.100"/>
-            <inertial pos="0 0 0" mass="150" diaginertia="1 1 1"/>
-            <geom name="trunk_0.100" class="tree_geom" type="cylinder" size="0.1 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.133" pos="20 0 0.133">
-            <freejoint name="tree_joint_0.133"/>
-            <inertial pos="0 0 0" mass="200" diaginertia="1 1 1"/>
-            <geom name="trunk_0.133" class="tree_geom" type="cylinder" size="0.133 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.167" pos="25 0 0.167">
-            <freejoint name="tree_joint_0.167"/>
-            <inertial pos="0 0 0" mass="250" diaginertia="1 1 1"/>
-            <geom name="trunk_0.167" class="tree_geom" type="cylinder" size="0.167 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.200" pos="30 0 0.2">
-            <freejoint name="tree_joint_0.200"/>
-            <inertial pos="0 0 0" mass="300" diaginertia="1 1 1"/>
-            <geom name="trunk_0.200" class="tree_geom" type="cylinder" size="0.2 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.233" pos="35 0 0.233">
-            <freejoint name="tree_joint_0.233"/>
-            <inertial pos="0 0 0" mass="350" diaginertia="1 1 1"/>
-            <geom name="trunk_0.233" class="tree_geom" type="cylinder" size="0.233 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.267" pos="40 0 0.267">
-            <freejoint name="tree_joint_0.267"/>
-            <inertial pos="0 0 0" mass="400" diaginertia="1 1 1"/>
-            <geom name="trunk_0.267" class="tree_geom" type="cylinder" size="0.267 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.300" pos="45 0 0.3">
-            <freejoint name="tree_joint_0.300"/>
-            <inertial pos="0 0 0" mass="450" diaginertia="1 1 1"/>
-            <geom name="trunk_0.300" class="tree_geom" type="cylinder" size="0.3 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.333" pos="50 0 0.333">
-            <freejoint name="tree_joint_0.333"/>
-            <inertial pos="0 0 0" mass="500" diaginertia="1 1 1"/>
-            <geom name="trunk_0.333" class="tree_geom" type="cylinder" size="0.333 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.367" pos="55 0 0.367">
-            <freejoint name="tree_joint_0.367"/>
-            <inertial pos="0 0 0" mass="550" diaginertia="1 1 1"/>
-            <geom name="trunk_0.367" class="tree_geom" type="cylinder" size="0.367 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body>
-        <body name="tree_0.400" pos="60 0 0.4">
-            <freejoint name="tree_joint_0.400"/>
-            <inertial pos="0 0 0" mass="600" diaginertia="1 1 1"/>
-            <geom name="trunk_0.400" class="tree_geom" type="cylinder" size="0.4 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
-        </body> -->
 
     </worldbody>
 
     <equality>
         <joint joint1="q4_big_telescope" joint2="q5_small_telescope" polycoef="0 1 0 0 0" name="equality1"/>
-        <joint joint1="theta10_outer_jaw_joint" joint2="theta12_inner_jaw_joint" polycoef="0 1 0 0 0" name="equality2" solimp="0.999 0.999 0.001" solref="0.0001 1"/>
+        <joint joint1="theta10_outer_jaw_joint" joint2="theta12_inner_jaw_joint" polycoef="0 1 0 0 0" name="equality2" />
     </equality>
 
     <contact>

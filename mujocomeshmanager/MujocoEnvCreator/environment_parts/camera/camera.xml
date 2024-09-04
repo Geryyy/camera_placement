@@ -1,8 +1,5 @@
 <mujoco model="camera">
     <compiler angle="radian" meshdir="environment_parts/camera/assets" />
-    <option integrator="implicitfast"/>
-        <option timestep="0.001" >
-    </option>
 
     <asset>
     </asset>

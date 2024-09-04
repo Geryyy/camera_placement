@@ -1,7 +1,5 @@
 <mujoco model="lab">
-    <compiler convexhull="false" angle="radian" meshdir="environment_parts/" texturedir="environment_parts/outdoor/textures" />
-    <option integrator="implicitfast"/>
-    <option timestep="0.001" />
+    <compiler angle="radian" meshdir="environment_parts/" texturedir="environment_parts/outdoor/textures" />
     <option>
         <flag multiccd="enable" />
     </option>
@@ -20,7 +18,7 @@
     <worldbody>
         <!-- <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/> -->
         <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1"/>
-        <geom name="ground" type="plane" material="matplane" size="0 0 1" pos="0 0 0" quat="1 0 0 0"   contype="1" conaffinity="1" group="0" />
+        <geom name="ground" type="plane" material="matplane" size="0 0 1" pos="0 0 0" quat="1 0 0 0"   condim="6" contype="1" conaffinity="1" group="0" solimp="0.9 0.95 0.001 0.5 2" solref="0.001 1" friction="350"/>
         <site name="ground_attach" pos="0 0 0" size="0.01" rgba="1 0 0 1" group="0"/>
 
         <!-- <body name="block1" pos="-10 2 0.5" quat="0.7071 0.7071 0 0">
