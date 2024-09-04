@@ -1,0 +1,37 @@
+<mujoco model="lab">
+    <compiler convexhull="true" angle="radian" meshdir="environment_parts/" texturedir="environment_parts/outdoor/textures" />
+    <option integrator="implicitfast"/>
+    <option timestep="0.001" />
+    <option>
+        <flag multiccd="enable" />
+    </option>
+    <statistic extent="0.3" center="0.3 0 0" meansize=".03"/>
+
+    <asset>
+        <texture name="texplane" type="2d" file="floor_texture.png" />
+        <material name="matplane" emission="1" texture="texplane" texrepeat="10 10"/>
+
+        <!-- <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512"/> -->
+        <texture name="skybox" type="skybox" gridsize="3 4" gridlayout=".U..LFRB.D.." file="stormy.png" />
+
+        <mesh name="legoblock" file="legoblock/assets/LegoBlock.stl" scale="10 10 10 "/>
+    </asset>
+
+    <worldbody>
+        <!-- <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/> -->
+        <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1"/>
+        <geom name="ground" type="plane" material="matplane" size="0 0 1" pos="0 0 0" quat="1 0 0 0"   contype="1" conaffinity="1" group="0" />
+        <site name="ground_attach" pos="0 0 0" size="0.01" rgba="1 0 0 1" group="0"/>
+
+        <!-- <body name="block1" pos="-10 2 0.5" quat="0.7071 0.7071 0 0">
+            <geom name="block1_geom" type="mesh" mesh="legoblock" rgba="0 1 0 1" contype="1" conaffinity="1" group="0" />
+            <inertial pos="0 0 0" mass="800" />
+        </body> -->
+
+        <!-- <body name="block2" pos="-10 0 0" quat="0.7071 0.7071 0 0">
+            <freejoint name="block2_joint"/>
+            <geom name="block2_geom" type="mesh" mesh="legoblock" rgba="0 1 1 1" contype="1" conaffinity="1" group="0" />
+            <inertial pos="0 0 0" mass="800" />
+        </body> -->
+    </worldbody>
+</mujoco>

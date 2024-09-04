@@ -1,0 +1,30 @@
+<mujoco model="lidar">
+    <compiler convexhull="true" angle="radian" />
+    <option integrator="implicitfast"/>
+    <option timestep="0.001">
+    </option>
+    <statistic extent="0.3" center="0.3 0 0" meansize=".03"/>
+
+    <asset>
+    </asset>
+
+    <worldbody>
+        <body name="lidar_body" pos="0 0 0" quat="1 0 0 0">
+            <geom name="cam_box" type="box" size="0.1 0.1 0.1" rgba="0 1 0 1" contype="1" conaffinity="1" group="0" />
+            <inertial pos="0 0 0" mass="0.1" diaginertia="0.0001 0.0001 0.0001" />
+
+            <body pos="0 0.5 2.2000000000000002" euler="0 3.1415 -2.5   ">
+                <replicate count="11" offset="0 0 0" euler="0.1222 0 0">
+                    <replicate count="11" sep="-" offset="0 0 0" euler="0 0.1222 0">
+                        <site name="lidar_geom" size=".001" rgba="1 1 0 1" />
+                    </replicate>
+                </replicate>
+            </body>
+
+        </body>
+    </worldbody>
+
+    <sensor>
+        <rangefinder name="lidar" site="lidar_geom"/>
+    </sensor>
+</mujoco>

@@ -1,0 +1,419 @@
+<?xml version="1.0" ?>
+<mujoco model="forestry_crane">
+    <extension>
+        <plugin plugin="mujoco.sdf.sdflib">
+            <instance name="sdf">
+                <config key="aabb" value="1000"/>
+            </instance>
+        </plugin>
+
+        <plugin plugin="mujoco.sdf.sdflib">
+            <instance name="sdf2">
+                <config key="aabb" value="1000"/>
+            </instance>
+        </plugin>
+    </extension>
+    <!--compiler meshdir="./models/mujoco_crane/timber_crane_simple_ver_without_visual/crane/meshes/" angle="radian" autolimits="true" balanceinertia="true" boundmass="0.000001" boundinertia="0.000001" discardvisual="true"/-->
+    <compiler meshdir="environment_parts/forestry_crane/assets/" angle="radian" inertiafromgeom="true" discardvisual="false" texturedir= "environment_parts/forestry_crane/texture"/>
+    <!-- <statistic meansize="0.1"/> -->
+    <!-- <option sdf_iterations="100" sdf_initpoints="40" timestep="0.005" integrator="implicitfast" solver="Newton" actuatorgroupdisable="2" cone="elliptic" /> -->
+    <option sdf_iterations="100" sdf_initpoints="40" timestep="0.005" integrator="implicitfast" solver="Newton" cone="elliptic" />
+
+    <!-- <visual>
+        <rgba haze="0.15 0.25 0.35 1"/>
+        <map stiffness="700" shadowscale="0.5" fogstart="1" fogend="15" zfar="40" haze="1" shadowclip="3"/>
+    </visual> -->
+
+    <default>
+        <default class="visual">
+            <geom contype="0" conaffinity="0"/>
+        </default>
+        <default class="collision">
+            <geom rgba="0 0 0 0" condim="3"/>
+            <!--
+			<geom rgba="1 1 0.1 1" condim="3"/>
+			-->
+        </default>
+        <!-- <default class="tree_geom">
+            <geom rgba="1 1 0.1 1" condim="3" contype="1" conaffinity="1"/>
+        </default> -->
+        <!-- <default class="motor">
+		<motor group="2" /> 
+	</default>
+    <default class="position">
+		<position group="0"/>
+    </default>
+    <default class="velocity">
+		<position group="1"/>
+	</default> -->
+    </default>
+
+    <actuator>
+        <!-- <position ctrllimited="true" ctrlrange="-3.71 3.71" joint="theta1_slewing_joint"  kp = "1e6" kv="1e5" name="pos_q1" gear="1"/>
+        <position ctrllimited="true" ctrlrange="-1.20 1.563" joint="theta2_boom_joint" kp = "1e6" kv="1e5" name="pos_q2" gear="1" />
+        <position ctrllimited="true" ctrlrange="-0.91 1.5" joint="theta3_arm_joint" kp = "1e6" kv="1e5" name="pos_q3" gear="1"/>
+        <position ctrllimited="true" ctrlrange="0 2.236" joint="q4_big_telescope" kp = "1e5" kv="1e5" name="pos_q4" gear="1"/>
+        <position ctrllimited="true" ctrlrange="-3.14159 3.14159" joint="theta8_rotator_joint" name="pos_q8_rotator_joint" kp = "1e5" kv="1e5" gear="1"/>
+        <position ctrllimited="true" ctrlrange="0 3" joint="theta12_inner_jaw_joint" name="pos_q12_inner_jaw_joint" kp = "1e5" kv="1e5" gear="1"/>  -->
+
+        <velocity name="vel_q1" joint="theta1_slewing_joint" kv = "1e7" ctrlrange="-1.57 1.57"/>
+        <velocity name="vel_q2" joint="theta2_boom_joint" kv = "1e7" ctrlrange="-1.57 1.57"/>
+		<velocity name="vel_q3" joint="theta3_arm_joint" kv = "1e7" ctrlrange="-1.57 1.57"/>
+		<velocity name="vel_q4" joint="q4_big_telescope" kv = "1e6" ctrlrange="-2 2"/>
+		<velocity name="vel_q8" joint="theta8_rotator_joint" kv = "3e5" ctrlrange="-3 3"/>
+		<velocity name="vel_q12" joint="theta12_inner_jaw_joint" kv = "3e5" ctrlrange="-3 3"/>
+
+        <!-- <position class="position" ctrllimited="true" ctrlrange="-3.71 3.71" joint="theta1_slewing_joint"  kp = "1e6" name="pos_q1" gear="1"/>
+        <position class="position" ctrllimited="true" ctrlrange="-1.20 1.563" joint="theta2_boom_joint" kp = "1e6" name="pos_q2" gear="1" />
+        <position class="position" ctrllimited="true" ctrlrange="-0.91 4.60" joint="theta3_arm_joint" kp = "1e6" name="pos_q3" gear="1"/>
+        <position class="position" ctrllimited="true" ctrlrange="0 2.236" joint="q4_big_telescope" kp = "1e5" name="pos_q4" gear="1"/>
+        <position class="position" ctrllimited="true" ctrlrange="-3.14159 3.14159" joint="theta8_rotator_joint" name="pos_q8_rotator_joint" kp = "1e5" gear="1"/>
+        <position class="position" ctrllimited="true" ctrlrange="0 3" joint="theta12_inner_jaw_joint" name="pos_q12_inner_jaw_joint" kp = "1e5" gear="1"/> -->
+
+        <!-- <velocity class = "velocity" name="vel_q1" joint="theta1_slewing_joint" kv = "1e6" ctrlrange="-1.57 1.57"/>
+		<velocity class = "velocity" name="vel_q2" joint="theta2_boom_joint" kv = "1e6" ctrlrange="-1.57 1.57"/>
+		<velocity class = "velocity" name="vel_q3" joint="theta3_arm_joint" kv = "1e6" ctrlrange="-1.57 1.57"/>
+		<velocity class = "velocity" name="vel_q4" joint="q4_big_telescope" kv = "1e5" ctrlrange="-2 2"/>
+		<velocity class = "velocity" name="vel_q8" joint="theta8_rotator_joint" kv = "3e4" ctrlrange="-3 3"/>
+		<velocity class = "velocity" name="vel_q12" joint="theta12_inner_jaw_joint" kv = "3e4" ctrlrange="-3 3"/>
+		
+		<motor class = "motor" ctrllimited="true" ctrlrange="-1e7 1e7" joint="theta1_slewing_joint" name="torq_q1"/>
+		<motor class = "motor" ctrllimited="true" ctrlrange="-1e7 1e7" joint="theta2_boom_joint" name="torq_q2"/>
+		<motor class = "motor" ctrllimited="true" ctrlrange="-1e7 1e7" joint="theta3_arm_joint" name="torq_q3"/>
+		<motor class = "motor" ctrllimited="true" ctrlrange="-1e7 1e7" joint="q4_big_telescope" name="torq_q4"/>
+		<motor class = "motor" ctrllimited="true" ctrlrange="-1e5 1e5" joint="theta8_rotator_joint" name="torq_theta8_rotator_joint"/>
+		<motor class = "motor" ctrllimited="true" ctrlrange="-1e5 1e5" joint="theta12_inner_jaw_joint" name="torq_theta12_inner_jaw_joint"/> -->
+    </actuator>
+
+    <asset>
+        <!-- <material name="tree_material" rgba="0.5058 0.388 0.278 1"/> -->
+
+        <mesh name="slewing_column_collision" file="collision/slewing_column.stl"/>
+        <mesh name="boom_collision" file="collision/boom.stl"/>
+        <mesh name="inner_telescope_collision" file="collision/inner_telescope.stl"/>
+        <mesh name="double_joint_link_collision" file="collision/double_joint_link.stl"/>
+        <mesh name="rotator_upper_part_collision" file="collision/rotator_upper_part.stl"/>
+        <mesh name="pincer_frame_collision" file="collision/pincer_frame.stl"/>
+
+        <!-- <texture name="texplane" type="2d" file="floor_texture.png"/> -->
+
+        <!-- visual meshes -->
+        <mesh name="lkw_fahrerkabine_rote_teile_visual" file="visual/lkw_fahrerkabine_rote_teile.stl"/>
+        <mesh name="lkw_fahrerkabine_rote_teile_collision" file="collision/lkw_fahrerkabine_rote_teile.stl"/>
+        <mesh name="lkw_vorderraeder_graue_teile_visual" file="visual/lkw_vorderraeder_graue_teile.stl"/>
+        <mesh name="lkw_hinterraeder_schwarze_teile_visual" file="visual/lkw_hinterraeder_schwarze_teile.stl"/>
+        <mesh name="lkw_kotfluegel_vorne_rot_visual" file="visual/lkw_kotfluegel_vorne_rot.stl"/>
+        <mesh name="lkw_tank_visual" file="visual/lkw_tank.stl"/>
+        <mesh name="lkw_rungen_visual" file="visual/lkw_rungen.stl"/>
+        <mesh name="support_front_visual" file="visual/support_front.stl"/>
+        <mesh name="lkw_vorderachse_und_fahrerkabine_schwarze_teile_visual" file="visual/lkw_vorderachse_und_fahrerkabine_schwarze_teile.stl"/>
+        <mesh name="lkw_hinterraeder_graue_teile_visual" file="visual/lkw_hinterraeder_graue_teile.stl"/>
+        <mesh name="lkw_kotfluegel_hinten_schwarz_visual" file="visual/lkw_kotfluegel_hinten_schwarz.stl"/>
+        <mesh name="mounting_base_visual" file="visual/mounting_base.stl"/>
+        <mesh name="lkw_fahrerkabine_weisse_teile_visual" file="visual/lkw_fahrerkabine_weisse_teile.stl"/>
+        <mesh name="lkw_ladeflaeche_mit_rammschutz_seitlich_visual" file="visual/lkw_ladeflaeche_mit_rammschutz_seitlich.stl"/>
+        <mesh name="slewing_column_visual" file="visual/slewing_column.stl"/>
+        <mesh name="control_box_visual" file="visual/control_box.stl"/>
+        <mesh name="boom_visual" file="visual/boom.stl"/>
+        <mesh name="arm_visual" file="visual/arm.stl"/>
+        <mesh name="outer_telescope_visual" file="visual/outer_telescope.stl"/>
+        <mesh name="inner_telescope_visual" file="visual/inner_telescope.stl"/>
+        <mesh name="double_joint_link_visual" file="visual/double_joint_link.stl"/>
+        <mesh name="rotator_upper_part_visual" file="visual/rotator_upper_part.stl"/>
+        <mesh name="pincer_frame_visual" file="visual/pincer_frame.stl"/>
+        <mesh name="inner_jaw_visual" file="visual/inner_jaw.stl"/>
+        <mesh name="outer_jaw_visual" file="visual/outer_jaw.stl"/>
+        <!--
+		<texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512"/>
+		-->
+        <!-- <texture name="skybox" type="skybox" gridsize="3 4" gridlayout=".U..LFRB.D.." file="stormy.png" /> -->
+
+        <!-- <material name="matplane" emission="1" texture="texplane" texrepeat="10 10" /> -->
+
+        <!-- SDF -->
+        <mesh name="outer_jaw_sdf" file="visual/outer_jawsimple.stl" scale="100 100 100">
+            <plugin instance="sdf"/>
+        </mesh>
+        <mesh name="inner_jaw_sdf" file="visual/inner_jawsimple.stl">
+            <plugin instance="sdf2"/>
+        </mesh>
+
+    </asset>
+
+    <worldbody>
+        <!-- <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false"/>
+        <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1"/>
+        <body name="floor" pos="0 0 0" euler="0 0 0">
+            <geom name="ground" type="plane" size="100 100 1" pos="0 0 0" quat="1 0 0 0" material="matplane" condim="3" solimp="0.99 0.99 0.001" solref="0.0001 1"/>
+        </body> -->
+
+        <body name="crane_model" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+            <body name="truck_cab" pos="0.0 0.0 0.52" quat="1.0 0.0 0.0 0.0">
+                <inertial pos="0 0 0" mass="200" diaginertia="10 10 10"/>
+                <geom name="truck_cab_collision" type="box" size="1.1 1.3 1.60" pos="0.75 0 1.08" group="0" class="collision"/>
+                <geom name="bed_collision_front" type="box" size="0.15 1.3 1.60" pos="-0.53 0 1.08" group="0" rgba="0 0 0 0"/>
+                <geom name="truck_bed_collision" type="box" size="3 1.3 0.45" pos="-3.5 0 -0.07" group="0" class="collision"/>
+                <geom name="bed_collision_bottom" type="box" size="3 1.1 0.15" pos="-3.5 0 0.52" group="1" rgba="0 0 0 0"/>
+                <geom name="truck_wall_left_collision" type="box" size="2.5 0.05 1.6" pos="-3.2 1.3 1.08" group="0" class="collision"/>
+                <geom name="bed_collision_left" type="box" size="2.5 0.05 1.6" pos="-3.2 1.2 1.08" group="1" rgba="0 0 0 0"/>
+                <geom name="truck_wall_right_collision" type="box" size="2.5 0.05 1.6" pos="-3.2 -1.3 1.08" group="0" class="collision"/>
+                <geom name="bed_collision_right" type="box" size="2.5 0.05 1.6" pos="-3.2 -1.2 1.08" group="1" rgba="0 0 0 0"/>
+                <geom name="truck_stabalizer" type="box" size="0.2 2.3 0.8" pos="-0.45 0 0.28" group="0" class="collision"/>
+                <!-- SITES FOR LOADING THE TRUCK -->
+                <site name="truck_bed_lower_left_front" pos="-0.7 1.15 0.68" size="0.01" rgba="1 0 0 1" />
+                <site name="truck_bed_lower_right_front" pos="-0.7 -1.15 0.68" size="0.01" rgba="1 0 0 1"/>
+                <site name="truck_bed_top_right_front" pos="-0.7 -1.15 2.68" size="0.01" rgba="1 0 0 1"/>
+                <site name="truck_bed_top_left_front" pos="-0.7 1.15 2.68" size="0.01" rgba="1 0 0 1"/>
+                <site name="truck_bed_lower_left_back" pos="-5.7 1.15 0.68" size="0.01" rgba="1 0 0 1"/>
+                <site name="truck_bed_lower_right_back" pos="-5.7 -1.15 0.68" size="0.01" rgba="1 0 0 1"/>
+                <site name="truck_bed_top_right_back" pos="-5.7 -1.15 2.68" size="0.01" rgba="1 0 0 1"/>
+                <site name="truck_bed_top_left_back" pos="-5.7 1.15 2.68" size="0.01" rgba="1 0 0 1"/>
+                <site name="TRUCK_BED_CENTER" pos="-3.3 0.0 0.68" size="0.01" rgba="1 0 0 1"/>
+
+                <!-- MINH -->
+                <geom name="truck_cab_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" group="3" mesh="lkw_fahrerkabine_rote_teile_visual"/>
+                <geom name="truck_cab_collision_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" type="mesh" mesh="lkw_fahrerkabine_rote_teile_collision"/>
+                <body name="tr_grey" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <inertial pos="0 0 0" mass="200" diaginertia="10 10 10"/>
+                    <geom name="tr_grey_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_vorderraeder_graue_teile_visual"/>
+                </body>
+                <body name="tr_rr_wheels" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_rr_wheels_visual_0" pos="-3.7 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_hinterraeder_schwarze_teile_visual"/>
+                </body>
+                <body name="cab_fender" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="cab_fender_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_kotfluegel_vorne_rot_visual"/>
+                </body>
+                <body name="tr_tank" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_tank_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_tank_visual"/>
+                </body>
+                <body name="tr_rungen" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_rungen_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_rungen_visual"/>
+                </body>
+                <body name="support_front" pos="-0.8 0.35 0.6207" quat="-2.0510342851533115e-10 0.0 0.0 1.0">
+                    <geom name="support_front_visual_0" pos="-0.315 0.35 0.1485" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="support_front_visual"/>
+                </body>
+                <body name="tr_black" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_black_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_vorderachse_und_fahrerkabine_schwarze_teile_visual"/>
+                </body>
+                <body name="tr_rr_rims" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_rr_rims_visual_0" pos="-3.7 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_hinterraeder_graue_teile_visual"/>
+                </body>
+                <body name="tr_rr_fender" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_rr_fender_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_kotfluegel_hinten_schwarz_visual"/>
+                </body>
+                <body name="tr_white" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_white_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_fahrerkabine_weisse_teile_visual"/>
+                </body>
+                <body name="tr_crane_frameplate" pos="-6.85 0.0 0.55" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_crane_frameplate_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="box" size="0.475 0.355 0.09"/>
+                </body>
+                <body name="tr_bed" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                    <geom name="tr_bed_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="lkw_ladeflaeche_mit_rammschutz_seitlich_visual"/>
+                </body>
+                <!-- MINH -->
+
+                <body name="K0_mounting_base" pos="-6.93852 0.35 0.6207" quat="-2.0510342851533115e-10 0.0 0.0 1.0">
+                    <inertial pos="-0.315 0.35 0.1485" quat="0.707107 0.707107 0 0" mass="200" diaginertia="10 10 10"/>
+                    <geom name="K0_mounting_base_visual_0" pos="-0.315 0.35 0.1485" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="mounting_base_visual"/>
+                    <!--geom name="K0_mounting_base_collision_0" pos="-0.315 0.35 0.1485" quat="1.0 0.0 0.0 0.0" class="collision" type="mesh" mesh="mounting_base_collision"/-->
+                                        
+                    <body name="moved_with_q1" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                        <joint name="theta1_slewing_joint" pos="0.0 0.0 0.0" type="hinge" range="-3.7099999134770023 3.7099999134770023" axis="0.0 0.0 1.0" damping="7500" limited ="true"/>
+                        <!-- camera attachement base -->
+                        <site name="base_attachement_left" pos="0 0.5 2.2" size="0.1" rgba="0 0 1 1" group="0"/>
+                        <body name="K1_slewing_column" pos="-0.17999999999999972 0.0 2.425" quat="0.7071067811140325 0.7071067812590626 0.0 0.0" gravcomp="0">
+                            <inertial pos="0.207138 -1.15958 0.00164017" quat="0.494046 0.534263 -0.46697 0.502415" mass="515.488" diaginertia="305.558 284.132 30.0118"/>
+                            <geom name="K1_slewing_column_collision_0" pos="0.18 -2.3652 0.0" quat="1.0 0.0 0.0 0.0" class="collision" type="mesh" mesh="slewing_column_collision"/>
+                            <geom name="K1_slewing_column_visual_0" pos="0.18 -2.3652 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="slewing_column_visual"/>
+                            <body name="control_box" pos="0.03000000000000025 -0.9100000000000001 -0.5000000000000001" quat="3.2759568508397764e-05 -3.275641303610518e-05 0.7071408362725098 0.7070727229427278" gravcomp="0">
+                                <inertial pos="0 0 0" quat="0.707107 0 0 0.707107" mass="150" diaginertia="20 13 9"/>
+                                <geom name="control_box_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="control_box_visual"/>
+                                <!--geom name="control_box_collision_0" pos="0.0 -0.04 0.0" quat="1.0 0.0 0.0 0.0" class="collision" type="box" size="0.4 0.225 0.55"/-->
+                            </body>
+                            <body name="moved_with_q2" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                                <joint name="theta2_boom_joint" pos="0.0 0.0 -0.0" type="hinge" range="-1.2000000140073657 1.563000055861744" axis="0.0 0.0 1.0" damping="9000" limited = "true"/>
+                                <body name="K2_boom" pos="3.4928833300000006 0.0 -5.551115123125783e-17" quat="1.0 0.0 0.0 0.0" gravcomp="0">
+                                    <inertial pos="-1.88284 0.0390364 0.00379684" quat="0.490683 0.535599 0.464004 0.507016" mass="407.665" diaginertia="483.479 482.52 11.5217"/>
+                                    <geom name="K2_boom_visual_0" pos="-3.49288333 0.0 0.0" quat="0.9987192078450507 0.0 0.0 -0.050595887988594" class="visual" type="mesh" mesh="boom_visual"/>
+                                    <geom name="K2_boom_collision_0" pos="-3.49288333 0.0 0.0" quat="0.9987192078450507 0.0 0.0 -0.050595887988594" class="collision" type="mesh" mesh="boom_collision"/>
+                                    <body name="moved_with_q3" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                                        <joint name="theta3_arm_joint" pos="0.0 0.0 -0.0" type="hinge" range="-0.9100000139512037 4.5999998539578195" axis="0.0 0.0 1.0" damping="8000" limited = "true"/>
+                                        <body name="K3_arm" pos="-0.39250000000000007 0.0 5.551115123125783e-17" quat="0.7071067811140325 0.7071067812590626 0.0 0.0" gravcomp="0">
+                                            <inertial pos="0.3015 -4.62296e-05 1.263" quat="0.999976 -1.68696e-05 0.000515042 0.00684672" mass="275.94" diaginertia="236.508 236.05 5.27223"/>
+                                            <geom name="K3_arm_visual_0" pos="0.3925 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="arm_visual"/>
+                                            <geom type="box" class="collision" size="0.15 0.15 1.4" pos="0.3 0 1.4"/>
+                                            <!-- camera attachement site k3 arm -->
+                                            <site name="k3_attachement_right" pos="0.3 0.1 1" size="0.1" rgba="1 0 0 1" group="0"/>
+                                            <site name="k3_attachement_left" pos="0.3 -0.1 1" size="0.1" rgba="0 0 1 1" group="0"/>
+
+                                            <body name="moved_with_q4" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                                                <joint name="q4_big_telescope" pos="0.0 0.0 0.0" type="slide" range="0.0 2.2360000610351562" axis="0.0 0.0 1.0" damping="5900" limited = "true"/>
+                                                <body name="K4_outer_telescope" pos="0.0 0.0 3.157001602823" quat="1.0 0.0 0.0 0.0" gravcomp="0">
+                                                    <geom name="K4_outer_telescope_visual_0" pos="0.2905 0.0 -0.0712" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="outer_telescope_visual"/>
+                                                    <geom type="box" size="0.08 0.08 1.6" pos="0.3 0 -1.6"/>
+                                                    <inertial pos="0.294715 1.72017e-05 -1.66571" quat="0.708177 0.000971053 0.000952022 0.706033" mass="128.16" diaginertia="128.378 128.139 1.08479"/>
+                                                    <body name="moved_with_q5" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                                                        <joint name="q5_small_telescope" pos="0.0 0.0 0.0" type="slide" range="0.0 2.2360000610351562" axis="0.0 0.0 1.0" damping="8000" limited = "true"/>
+                                                        <body name="K5_inner_telescope" pos="0.0 0.0 0.0" quat="-0.7071067811140325 0.7071067812590626 0.0 0.0" gravcomp="0">
+                                                            <inertial pos="0.251 1.57 -0.000156992" quat="0.509945 0.488826 -0.510838 0.489949" mass="95.827" diaginertia="88.4192 88.0333 0.956801"/>
+                                                            <!--geom name="K5_inner_telescope_collision_0" pos="0.281 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="collision" type="mesh" mesh="inner_telescope_collision"/-->
+                                                            <geom name="K5_inner_telescope_visual_0" pos="0.281 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="inner_telescope_visual"/>
+
+                                                            <body name="moved_with_q6" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                                                                <joint name="theta6_tip_joint" pos="0.0 0.0 -0.0" type="hinge" range="-1.570000041628963 1.570000041628963" axis="0.0 0.0 1.0" damping="200" limited = "true"/>
+                                                                <body name="K6_double_joint_link" pos="-0.2129999999999992 0.0 0.0" quat="-0.7071067811140325 0.7071067812590626 0.0 0.0" gravcomp="0">
+                                                                    <inertial pos="0.1065 0 0" quat="0.5 0.5 -0.5 0.5" mass="15" diaginertia="0.0893141 0.0615163 0.0374078"/>
+                                                                    <geom name="K6_double_joint_link_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="double_joint_link_visual"/>
+                                                                    <!--geom name="K6_double_joint_link_collision_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="collision" type="mesh" mesh="double_joint_link_collision"/-->
+
+                                                                    <body name="moved_with_q7" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                                                                        <joint name="theta7_tilt_joint" pos="0.0 0.0 0.0" type="hinge" range="0.7853980302393938 2.3561899628184917" axis="0.0 0.0 1.0" damping="200" limited = "true"/>
+                                                                        <body name="K7_rotator_upper_part" pos="0.0 0.0 0.0" quat="-0.7071067811140325 0.7071067812590626 0.0 0.0" gravcomp="0">
+                                                                            <inertial pos="0 0 0.1715" mass="55" diaginertia="0.676725 0.676725 0.275"/>
+                                                                            <geom name="K7_rotator_upper_part_visual_0" pos="0.0 0.0 0.113385" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="rotator_upper_part_visual"/>
+                                                                            <!--geom name="K7_rotator_upper_part_collision_0" pos="0.0 0.0 0.113385" quat="1.0 0.0 0.0 0.0" class="collision" type="mesh" mesh="rotator_upper_part_collision"/-->
+                                                                            <body name="moved_with_q8" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0">
+                                                                                <joint name="theta8_rotator_joint" pos="0.0 0.0 0.0" axis="0.0 0.0 1.0" damping="2000" range="-3.1416 3.1416" limited = "true"/>
+                                                                                <body name="K8_tool_center_point" pos="0.0 0.0 0.578" quat="1.0 0.0 0.0 0.0" gravcomp="0">
+                                                                                    <inertial pos="-0.00116026 -0.0035702 -0.0291462" quat="0.501219 0.502795 -0.499387 0.496578" mass="67.6133" diaginertia="5.33003 4.23993 2.47134"/>
+                                                                                    <site name="K12_inner_jaw_help_left_top" pos="-0.25 0.25 0" size="0.01"/>
+                                                                                    <site name="K12_inner_jaw_help_right_top" pos="0.25 0.25 0" size="0.01"/>
+                                                                                    <site name="K10_outer_jaw_help_right_top" pos="-0.25 -0.25 0" size="0.01"/>
+                                                                                    <site name="K10_outer_jaw_help_left_top" pos="0.25 -0.25 -0" size="0.01"/>
+                                                                                    <site name="K12_inner_jaw_help_left_bottom" pos="-0.45 0.45 0.7" size="0.01"/>
+                                                                                    <site name="K12_inner_jaw_help_right_bottom" pos="0.45 0.45 0.7" size="0.01"/>
+                                                                                    <site name="K10_outer_jaw_help_right_bottom" pos="-0.45 -0.45 0.7" size="0.01"/>
+                                                                                    <site name="K10_outer_jaw_help_left_bottom" pos="0.45 -0.45 0.7" size="0.01"/>
+                                                                                    <site name="CENTER_CLAW" pos="0 0 0.5" size="0.05"/>
+
+                                                                                    <geom name="K8_tool_center_point_visual_0" pos="0.0 0.0 -0.454717" quat="1.0 0.0 0.0 0.0" class="visual" type="mesh" mesh="pincer_frame_visual"/>
+                                                                                    <geom name="K8_tool_center_point_collision_0" pos="0.0 0.0 -0.454717" quat="1.0 0.0 0.0 0.0" class="collision" type="mesh" mesh="pincer_frame_collision"/>
+                                                                                    <body name="K11" pos="0.0 0.3248 2.7755575615628914e-17" quat="0.49999999989744826 0.5 0.5000000001025517 0.5">
+                                                                                        <inertial pos="0 0 0" mass="0.1" diaginertia="1e-06 1e-06 1e-06"/>
+                                                                                        <body name="moved_with_q12" pos="-1.3877787807814457e-17 0.0 0.0" quat="1.0 -2.1562786888997945e-30 0.0 0.0">
+                                                                                            <joint name="theta12_inner_jaw_joint" pos="2.8463827093604277e-27 2.8463802397415088e-27 -1.3877787807814457e-17" type="hinge" range="0 3.000000101597441" axis="0.0 0.0 1.0" limited = "true" />
+                                                                                            <body name="K12_inner_jaw" pos="0.8566 0.0 -1.7763568394002505e-15" quat="1.0 -2.1562786888997945e-30 0.0 0.0" gravcomp="0">
+                                                                                                <inertial pos="-0.615697 -0.130086 -0.00176372" quat="0.519221 0.521631 0.476312 0.48108" mass="61.03" diaginertia="7.73533 6.42725 2.60788"/>
+                                                                                                <geom type="sdf" name="inner_jaw_sdf_" mesh="inner_jaw_sdf" pos="-0.5663 0.4813 0.0" quat="-0.7064682714200307 -0.03004299210485709 0.7064682715649296 -0.030042992098695164">
+                                                                                                    <plugin instance="sdf2"/>
+                                                                                                </geom>
+                                                                                            </body>
+                                                                                        </body>
+                                                                                    </body>
+                                                                                    <body name="K9" pos="0.0 -0.3401799999999999 0.0" quat="-0.49999999989744826 -0.5 0.5000000001025517 0.5" gravcomp="0">
+                                                                                        <inertial pos="0 0 0" mass="0.1" diaginertia="1e-06 1e-06 1e-06"/>
+                                                                                        <body name="moved_with_q10" pos="0.0 -2.7755575615628914e-17 0.0" quat="1.0 -2.1562756796342564e-30 0.0 0.0">
+                                                                                            <joint name="theta10_outer_jaw_joint" pos="-5.692763875057885e-27 -2.7755575615628914e-17 1.7078294398412643e-26" type="hinge" range="0.0 3.000000101597441" axis="0.0 0.0 1.0" damping="400" limited = "true"/>
+                                                                                            <body name="K10_outer_jaw" pos="0.8566000000000001 0.0 1.7763568394002505e-15" quat="1.0 -2.1562756796342564e-30 0.0 0.0" gravcomp="0">
+                                                                                                <inertial pos="-0.614006 -0.136247 0.00158102" quat="0.521541 0.522989 0.479855 0.473516" mass="63.557" diaginertia="9.23118 7.44098 3.30539"/>
+                                                                                                <geom type="sdf" name="outer_jaw_sdf_" mesh="outer_jaw_sdf" pos="-0.5509339 0.47161 0.0" quat="0.706860923855094 -0.018644951711224572 0.7068609240000736 0.01864495170740042">
+                                                                                                    <plugin instance="sdf"/>
+                                                                                                </geom>
+
+                                                                                            </body>
+                                                                                        </body>
+                                                                                    </body>
+                                                                                </body>
+                                                                            </body>
+                                                                        </body>
+                                                                    </body>
+                                                                </body>
+                                                            </body>
+                                                        </body>
+                                                    </body>
+                                                </body>
+                                            </body>
+                                        </body>
+                                    </body>
+                                </body>
+                            </body>
+                            <body name="hydraulic_block" pos="-0.2999999999999998 -0.7400000000000002 -5.551115123125783e-17" quat="0.9987502603949663 -1.5597328848292796e-19 -2.0938167711289532e-18 0.04997916927067833" gravcomp="0">
+                                <inertial pos="0 0 0" quat="0.707107 0.707107 0 0" mass="150" diaginertia="10 8 6"/>
+                                <geom name="hydraulic_block_collision_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="collision" type="box" size="0.2 0.34 0.31"/>
+                                <geom name="hydraulic_block_visual_0" pos="0.0 0.0 0.0" quat="1.0 0.0 0.0 0.0" class="visual" type="box" size="0.2 0.34 0.31"/>
+                            </body>
+
+                        </body>
+                    </body>
+                </body>
+
+            </body>
+        </body>
+
+        <!--body name="tree" pos="-7 6 0.4">
+		<freejoint name="tree_joint"/>
+		<inertial pos="0 0 0" mass="1000" diaginertia="1 1 1"/>
+      <geom name="trunk" class="collision" type="cylinder" size="0.4 2.5" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+    </body-->
+
+        <!-- <body name="tree_0.100" pos="15 0 0.1">
+            <freejoint name="tree_joint_0.100"/>
+            <inertial pos="0 0 0" mass="150" diaginertia="1 1 1"/>
+            <geom name="trunk_0.100" class="tree_geom" type="cylinder" size="0.1 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.133" pos="20 0 0.133">
+            <freejoint name="tree_joint_0.133"/>
+            <inertial pos="0 0 0" mass="200" diaginertia="1 1 1"/>
+            <geom name="trunk_0.133" class="tree_geom" type="cylinder" size="0.133 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.167" pos="25 0 0.167">
+            <freejoint name="tree_joint_0.167"/>
+            <inertial pos="0 0 0" mass="250" diaginertia="1 1 1"/>
+            <geom name="trunk_0.167" class="tree_geom" type="cylinder" size="0.167 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.200" pos="30 0 0.2">
+            <freejoint name="tree_joint_0.200"/>
+            <inertial pos="0 0 0" mass="300" diaginertia="1 1 1"/>
+            <geom name="trunk_0.200" class="tree_geom" type="cylinder" size="0.2 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.233" pos="35 0 0.233">
+            <freejoint name="tree_joint_0.233"/>
+            <inertial pos="0 0 0" mass="350" diaginertia="1 1 1"/>
+            <geom name="trunk_0.233" class="tree_geom" type="cylinder" size="0.233 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.267" pos="40 0 0.267">
+            <freejoint name="tree_joint_0.267"/>
+            <inertial pos="0 0 0" mass="400" diaginertia="1 1 1"/>
+            <geom name="trunk_0.267" class="tree_geom" type="cylinder" size="0.267 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.300" pos="45 0 0.3">
+            <freejoint name="tree_joint_0.300"/>
+            <inertial pos="0 0 0" mass="450" diaginertia="1 1 1"/>
+            <geom name="trunk_0.300" class="tree_geom" type="cylinder" size="0.3 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.333" pos="50 0 0.333">
+            <freejoint name="tree_joint_0.333"/>
+            <inertial pos="0 0 0" mass="500" diaginertia="1 1 1"/>
+            <geom name="trunk_0.333" class="tree_geom" type="cylinder" size="0.333 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.367" pos="55 0 0.367">
+            <freejoint name="tree_joint_0.367"/>
+            <inertial pos="0 0 0" mass="550" diaginertia="1 1 1"/>
+            <geom name="trunk_0.367" class="tree_geom" type="cylinder" size="0.367 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body>
+        <body name="tree_0.400" pos="60 0 0.4">
+            <freejoint name="tree_joint_0.400"/>
+            <inertial pos="0 0 0" mass="600" diaginertia="1 1 1"/>
+            <geom name="trunk_0.400" class="tree_geom" type="cylinder" size="0.4 2.75" material="tree_material" rgba="0.5 0.3 0.2 1" euler="1.570796326 0 0" friction="5" priority="1"/>
+        </body> -->
+
+    </worldbody>
+
+    <equality>
+        <joint joint1="q4_big_telescope" joint2="q5_small_telescope" polycoef="0 1 0 0 0" name="equality1"/>
+        <joint joint1="theta10_outer_jaw_joint" joint2="theta12_inner_jaw_joint" polycoef="0 1 0 0 0" name="equality2" solimp="0.999 0.999 0.001" solref="0.0001 1"/>
+    </equality>
+
+    <contact>
+        <exclude body1="K3_arm" body2="K4_outer_telescope"/>
+        <exclude body1="K3_arm" body2="K5_inner_telescope"/>
+        <exclude body1="K4_outer_telescope" body2="K5_inner_telescope"/>
+        <exclude body1="K8_tool_center_point" body2="K12_inner_jaw"/>
+        <exclude body1="K8_tool_center_point" body2="K10_outer_jaw"/>
+        <exclude body1="K12_inner_jaw" body2="K1_slewing_column"/>
+        <exclude body1="K10_outer_jaw" body2="K1_slewing_column"/>
+        <exclude body1="truck_cab" body2="K1_slewing_column"/>
+        <exclude body1="K12_inner_jaw" body2="K10_outer_jaw"/>
+        <exclude body1="K0_mounting_base" body2="K1_slewing_column"/>
+    </contact>
+</mujoco>
